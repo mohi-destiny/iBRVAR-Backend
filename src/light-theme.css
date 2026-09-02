@@ -1,0 +1,61 @@
+/* ---------------------------------------------------------------------
+   Light mode overrides.
+   Every component in this app was written with dark colors (bg-zinc-950,
+   text-zinc-100, etc.) as literal Tailwind classes rather than the dark:/
+   light: variant system — rewriting every component individually would be
+   a huge, risky change. Instead, this block recolors those exact class
+   names whenever <html data-theme="light"> is set, so switching themes
+   works everywhere at once without touching any component file.
+   Append this to the END of your existing src/index.css (after the
+   Tailwind import), don't replace the whole file.
+--------------------------------------------------------------------- */
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* Page/panel backgrounds, darkest to lightest in the dark palette map to
+   lightest to darkest here */
+[data-theme="light"] .bg-zinc-950 { background-color: #ffffff !important; }
+[data-theme="light"] .bg-zinc-900 { background-color: #f4f4f5 !important; }
+[data-theme="light"] .bg-zinc-800 { background-color: #e4e4e7 !important; }
+[data-theme="light"] .bg-zinc-700 { background-color: #d4d4d8 !important; }
+
+/* Hover/active variants used throughout (hover:bg-zinc-700 / hover:bg-zinc-800 etc.) */
+[data-theme="light"] .hover\:bg-zinc-700:hover { background-color: #d4d4d8 !important; }
+[data-theme="light"] .hover\:bg-zinc-800:hover { background-color: #e4e4e7 !important; }
+
+/* Text colors */
+[data-theme="light"] .text-zinc-100 { color: #18181b !important; }
+[data-theme="light"] .text-zinc-200 { color: #27272a !important; }
+[data-theme="light"] .text-zinc-300 { color: #3f3f46 !important; }
+[data-theme="light"] .text-zinc-400 { color: #52525b !important; }
+[data-theme="light"] .text-zinc-500 { color: #71717a !important; }
+[data-theme="light"] .text-zinc-600 { color: #a1a1aa !important; }
+[data-theme="light"] .text-zinc-700 { color: #d4d4d8 !important; }
+
+/* Borders */
+[data-theme="light"] .border-zinc-800 { border-color: #d4d4d8 !important; }
+[data-theme="light"] .border-zinc-700 { border-color: #a1a1aa !important; }
+
+/* Translucent black overlays (badges over video, modal backdrops) stay
+   dark-on-video since the video itself is still black, but bump opacity
+   down slightly so they read correctly against a lighter surrounding page */
+[data-theme="light"] .bg-black\/60,
+[data-theme="light"] .bg-black\/65,
+[data-theme="light"] .bg-black\/70,
+[data-theme="light"] .bg-black\/80 {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Disabled-state opacity classes read oddly if left unchanged on a light
+   background — slightly increase contrast */
+[data-theme="light"] .disabled\:opacity-40:disabled,
+[data-theme="light"] .disabled\:opacity-50:disabled {
+  opacity: 0.5 !important;
+}
+
+/* NOTE: video elements, camera feed backgrounds (bg-black on the video
+   tiles themselves), and brand accent colors (cyan/violet/amber/red) are
+   intentionally left unchanged in light mode — a black video letterbox
+   and colored status badges look correct on either background. */
